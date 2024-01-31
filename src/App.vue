@@ -32,7 +32,7 @@ interface Coordinates {
   y: number;
 }
 
-const selectedPeice = ref<string>("King");
+const selectedPeice = ref<string>("Soldier");
 const validMoves = ref<Coordinates[]>([]);
 const selectedCell = ref<Coordinates>({ x: 0, y: 0 });
 
