@@ -7,7 +7,7 @@
           <div
             v-for="x in 8"
             :key="x"
-            style="width: 80px; height: 80px"
+            class="p-4 md:p-8 border border-black flex items-center justify-center"
             :style="
               selectedCell.x === x && selectedCell.y === y
                 ? 'background-color: lightblue'
@@ -15,7 +15,6 @@
                 ? 'background-color: lightgreen'
                 : ''
             "
-            class="p-4 border border-black flex items-center justify-center"
             @click="handleCellClick(x, y)"
           ></div>
         </div>
