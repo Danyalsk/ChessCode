@@ -45,7 +45,7 @@ const selectedCell = ref<Coordinates>({ x: 0, y: 0 });
 
 const handleCellClick = (x: number, y: number) => {
   selectedCell.value = { x, y };
-  const soldierMoves = [{ x, y: y + 1 }];
+  const soldierMoves = [{ x, y: y - 1 }];
   const kingMoves = [
     { x: x - 1, y: y - 1 },
     { x, y: y - 1 },
