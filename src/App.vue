@@ -25,13 +25,16 @@
             @click="handleCellClick(x, y)"
           ></div>
         </div>
+        <div class="p-1">
+          Number of possible moves :{{ filteredValidMoves }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import Select from "./components/Select.vue";
 
 interface Coordinates {
@@ -42,6 +45,13 @@ interface Coordinates {
 const selectedPeice = ref<string>("Soldier");
 const validMoves = ref<Coordinates[]>([]);
 const selectedCell = ref<Coordinates>({ x: 0, y: 0 });
+
+const filteredValidMoves = computed(
+  () =>
+    validMoves.value.filter(
+      (move) => move.x > 0 && move.x <= 8 && move.y > 0 && move.y <= 8
+    ).length
+);
 
 const handleCellClick = (x: number, y: number) => {
   selectedCell.value = { x, y };
