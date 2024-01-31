@@ -1,6 +1,13 @@
 <template>
-  <div class="w-screen h-screen flex justify-center items-center">
-    <div class="flex-col space-y-4">
+  <div
+    class="w-screen h-screen flex justify-center items-center bg-gradient-to-r from-slate-900 to-slate-700"
+  >
+    <div class="flex-col space-y-4 bg-white p-4 border border-black rounded-md">
+      <h1
+        class="text-2xl font-bold justify-center items-center flex bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent"
+      >
+        Chess Moves Finder
+      </h1>
       <Select v-model="selectedPeice" />
       <div class="flex-col">
         <div v-for="y in 8" :key="y" class="flex">
