@@ -56,136 +56,50 @@ const filteredValidMoves = computed(
 const handleCellClick = (x: number, y: number) => {
   selectedCell.value = { x, y };
   const soldierMoves = [{ x, y: y - 1 }];
-  const kingMoves = [
-    { x: x - 1, y: y - 1 },
-    { x, y: y - 1 },
-    { x: x + 1, y: y - 1 },
-    { x: x - 1, y },
-    { x: x + 1, y },
-    { x: x - 1, y: y + 1 },
-    { x, y: y + 1 },
-    { x: x + 1, y: y + 1 },
-  ];
-  const queenMoves = [
-    { x: x - 7, y },
-    { x: x - 6, y },
-    { x: x - 5, y },
-    { x: x - 4, y },
-    { x: x - 3, y },
-    { x: x - 2, y },
-    { x: x - 1, y },
-    { x: x + 1, y },
-    { x: x + 2, y },
-    { x: x + 3, y },
-    { x: x + 4, y },
-    { x: x + 5, y },
-    { x: x + 6, y },
-    { x: x + 7, y },
-    { x, y: y - 7 },
-    { x, y: y - 6 },
-    { x, y: y - 5 },
-    { x, y: y - 4 },
-    { x, y: y - 3 },
-    { x, y: y - 2 },
-    { x, y: y - 1 },
-    { x, y: y + 1 },
-    { x, y: y + 2 },
-    { x, y: y + 3 },
-    { x, y: y + 4 },
-    { x, y: y + 5 },
-    { x, y: y + 6 },
-    { x, y: y + 7 },
-    { x: x - 7, y: y - 7 },
-    { x: x - 6, y: y - 6 },
-    { x: x - 5, y: y - 5 },
-    { x: x - 4, y: y - 4 },
-    { x: x - 3, y: y - 3 },
-    { x: x - 2, y: y - 2 },
-    { x: x - 1, y: y - 1 },
-    { x: x + 1, y: y + 1 },
-    { x: x + 2, y: y + 2 },
-    { x: x + 3, y: y + 3 },
-    { x: x + 4, y: y + 4 },
-    { x: x + 5, y: y + 5 },
-    { x: x + 6, y: y + 6 },
-    { x: x + 7, y: y + 7 },
-    { x: x - 7, y: y + 7 },
-    { x: x - 6, y: y + 6 },
-    { x: x - 5, y: y + 5 },
-    { x: x - 4, y: y + 4 },
-    { x: x - 3, y: y + 3 },
-    { x: x - 2, y: y + 2 },
-    { x: x - 1, y: y + 1 },
-    { x: x + 1, y: y - 1 },
-    { x: x + 2, y: y - 2 },
-    { x: x + 3, y: y - 3 },
-    { x: x + 4, y: y - 4 },
-    { x: x + 5, y: y - 5 },
-    { x: x + 6, y: y - 6 },
-    { x: x + 7, y: y - 7 },
-  ];
+  const kingMoves = [];
 
-  const rookMoves = [
-    { x: x - 7, y },
-    { x: x - 6, y },
-    { x: x - 5, y },
-    { x: x - 4, y },
-    { x: x - 3, y },
-    { x: x - 2, y },
-    { x: x - 1, y },
-    { x: x + 1, y },
-    { x: x + 2, y },
-    { x: x + 3, y },
-    { x: x + 4, y },
-    { x: x + 5, y },
-    { x: x + 6, y },
-    { x: x + 7, y },
-    { x, y: y - 7 },
-    { x, y: y - 6 },
-    { x, y: y - 5 },
-    { x, y: y - 4 },
-    { x, y: y - 3 },
-    { x, y: y - 2 },
-    { x, y: y - 1 },
-    { x, y: y + 1 },
-    { x, y: y + 2 },
-    { x, y: y + 3 },
-    { x, y: y + 4 },
-    { x, y: y + 5 },
-    { x, y: y + 6 },
-    { x, y: y + 7 },
-  ];
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (i !== 0 || j !== 0) {
+        kingMoves.push({ x: x + i, y: y + j });
+      }
+    }
+  }
 
-  const bishopMoves = [
-    { x: x - 7, y: y - 7 },
-    { x: x - 6, y: y - 6 },
-    { x: x - 5, y: y - 5 },
-    { x: x - 4, y: y - 4 },
-    { x: x - 3, y: y - 3 },
-    { x: x - 2, y: y - 2 },
-    { x: x - 1, y: y - 1 },
-    { x: x + 1, y: y + 1 },
-    { x: x + 2, y: y + 2 },
-    { x: x + 3, y: y + 3 },
-    { x: x + 4, y: y + 4 },
-    { x: x + 5, y: y + 5 },
-    { x: x + 6, y: y + 6 },
-    { x: x + 7, y: y + 7 },
-    { x: x - 7, y: y + 7 },
-    { x: x - 6, y: y + 6 },
-    { x: x - 5, y: y + 5 },
-    { x: x - 4, y: y + 4 },
-    { x: x - 3, y: y + 3 },
-    { x: x - 2, y: y + 2 },
-    { x: x - 1, y: y + 1 },
-    { x: x + 1, y: y - 1 },
-    { x: x + 2, y: y - 2 },
-    { x: x + 3, y: y - 3 },
-    { x: x + 4, y: y - 4 },
-    { x: x + 5, y: y - 5 },
-    { x: x + 6, y: y - 6 },
-    { x: x + 7, y: y - 7 },
-  ];
+  const queenMoves = [];
+
+  for (let i = -7; i <= 7; i++) {
+    queenMoves.push({ x: x + i, y });
+    queenMoves.push({ x, y: y + i });
+    queenMoves.push({ x: x - i, y });
+    queenMoves.push({ x, y: y - i });
+
+    queenMoves.push({ x: x + i, y: y + i });
+    queenMoves.push({ x: x - i, y: y + i });
+    queenMoves.push({ x: x + i, y: y - i });
+    queenMoves.push({ x: x - i, y: y - i });
+  }
+
+  const rookMoves = [];
+
+  for (let i = -7; i <= 7; i++) {
+    if (i !== 0) {
+      rookMoves.push({ x: x + i, y }, { x, y: y + i });
+    }
+  }
+
+  const bishopMoves = [];
+
+  for (let i = -7; i <= 7; i++) {
+    if (i !== 0) {
+      bishopMoves.push(
+        { x: x + i, y: y + i },
+        { x: x - i, y: y - i },
+        { x: x - i, y: y + i },
+        { x: x + i, y: y - i }
+      );
+    }
+  }
 
   const horseMoves = [
     { x: x - 2, y: y - 1 },
